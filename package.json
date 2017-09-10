@@ -1,0 +1,15 @@
+{
+  "name": "basecamp-on-slack",
+  "version": "0.0.0",
+  "description": "Manage basecamp on slack",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ramesh Kumar <codeofnode@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "json2server": "^0.1.8",
+    "serverless-offline": "^3.15.3"
+  }
+}

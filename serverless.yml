@@ -1,0 +1,50 @@
+service: basecamp-on-slcack
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    DYNAMODB_SECRET: 'YOUR_OWN_SECRET'
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    BC_USER_TABLE: ${self:service}-bcusers-${opt:stage, self:provider.stage}
+    BASECAMP_KEY: 'YOUR_BASECAMP_AUTH_KEY'
+    BASECAMP_ACCOUNT_ID: 'YOUR_BASECAMP_ACCOUNT_ID'
+    BASECAMP_PROJECT_ID: 'YOUR_BASECAMP_PROJECT_ID'
+    BASECAMP_LIST_ID: 'YOUR_BASECAMP_TODOLIST_ID'
+    BASECAMP_ICON_URL: 'https://3.basecamp-static.com/bcxhq/assets/about/press/basecamp-press-kit/logos/basecamp-full-standard-3345adc6950bd888db795a6a6d65829ab6b730b86b5441de05162b1161686f8b.png'
+    SLACK_WEBHOOK_URL: 'YOUR_SLACK_WEBHOOK_URL'
+    SLACK_USERLIST_URL: 'YOUR_SLACK_WEBHOOK_URL'
+    SLACK_CHANNEL: '#MY_CHANNEL'
+    SLACK_USERNAME: 'basecampbot'
+    SLACK_ACCESS_TOKEN: 'slackaccesstocken'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  getBasecampTodos:
+    handler: handler.getBasecampTodos
+    events:
+      - http: GET getBasecampTodos
+      - schedule: rate(10 minutes) # Change it to your own if needed
+  assignTask:
+    handler: handler.assignTask
+    events:
+      - http:
+        path: /
+        method: post
+        cors: true
+  syncUsers:
+    handler: handler.syncUsers
+    events:
+      - http:
+        path: /users/sync
+        method: post
+        cors: true
