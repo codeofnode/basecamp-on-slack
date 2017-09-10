@@ -34,14 +34,14 @@ Simply reply the notification from bot as below
 
 ## workflow
 * Sync the users
-** Fetch slack users
-** Fetch basecamp users
-** create the map into table: BC_USER_TABLE
+* * Fetch slack users
+* * Fetch basecamp users
+* * create the map into table: BC_USER_TABLE
 * For each interval of 10 minutes
-** Lamda handler is called to make query to find the new todos
-** For each todo, create entry in table : DYNAMODB_TABLE and make a slack post
+* * Lamda handler is called to make query to find the new todos
+* * For each todo, create entry in table : DYNAMODB_TABLE and make a slack post
 * whenever a user replys to that notification with above synctax
-** It assigns mentioned user to that task
+* * It assigns mentioned user to that task
 
 ### test locally
 `serverless invoke local — function getBasecampTodos`
