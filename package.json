@@ -9,7 +9,6 @@
   "author": "Ramesh Kumar <codeofnode@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "json2server": "^0.1.8",
-    "serverless-offline": "^3.15.3"
+    "json2server": "^0.1.8"
   }
 }

@@ -49,8 +49,5 @@ Simply reply the notification from bot as below
 ### deploy
 `serveless deploy`
 
-## Contribute
-This project is open source, and we welcome anybody who wants to participate and contribute!
-
 ## License
 The MIT License (MIT)
